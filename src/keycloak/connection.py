@@ -75,9 +75,9 @@ class ConnectionManager(object):
         for protocol in ("https://", "http://"):
             adapter = HTTPAdapter(max_retries=1)
             # adds POST to retry whitelist
-            allowed_methods = set(adapter.max_retries.allowed_methods)
+            allowed_methods = set(adapter.max_retries.method_whitelist)
             allowed_methods.add("POST")
-            adapter.max_retries.allowed_methods = frozenset(allowed_methods)
+            adapter.max_retries.method_whitelist = frozenset(allowed_methods)
 
             self._s.mount(protocol, adapter)
 
